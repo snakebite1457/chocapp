@@ -1,0 +1,75 @@
+<GridLayout>
+
+  <GridLayout #background
+    scaleX="1.4"
+    scaleY="1.4"
+    class="background"></GridLayout>
+
+  <StackLayout #initialContainer
+    class="initial-container">
+    <Label
+      text="GROCERIES"
+      class="initial-label"></Label>
+    <StackLayout
+      (tap)="showMainContent()"
+      class="initial-button">
+      <Label
+        text="Login"
+        class="initial-button-label"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <StackLayout #mainContainer
+    class="main-container">
+    <Label
+      class="main-label"
+      text="GROCERIES"
+      [color]="isLoggingIn? 'black' : 'white'"></Label>
+
+    <GridLayout #formControls
+      class="form-controls"
+      rows="auto, auto"
+      translateY="50">
+      <TextField #email
+        hint="Email Address"
+        keyboardType="email"
+        returnKeyType="next"
+        autocorrect="false"
+        autocapitalizationType="none"
+        row="0"></TextField>
+      <TextField #password
+        hint="Password"
+        secure="true"
+        returnKeyType="done"
+        (returnPress)="submit()"
+        [(ngModel)]="user.password"
+        [isEnabled]="!isAuthenticating"
+        row="1"></TextField>
+
+      <ActivityIndicator
+        [busy]="isAuthenticating"
+        rowSpan="2"></ActivityIndicator>
+    </GridLayout>
+
+    <Button
+      [text]="isLoggingIn ? 'Login' : 'Sign up'"></Button>
+
+    <Label
+      class="forgot-password-label"
+      text="Forgot password?"
+      [opacity]="isLoggingIn ? 1 : 0"></Label>
+
+    <StackLayout #signUpStack
+      class="sign-up-stack"
+      translateY="50">
+      <Label
+        [text]="'Sign up here'"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <!-- The fruit logo that appears within the container -->
+  <AbsoluteLayout #logoContainer
+    class="logo-container">
+  </AbsoluteLayout>
+
+</GridLayout>
